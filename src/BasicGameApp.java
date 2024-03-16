@@ -38,112 +38,93 @@ public class BasicGameApp implements Runnable {
    public JPanel panel;
    
 	public BufferStrategy bufferStrategy;
-	public Image astroPic;
+
 	public Image background;
 	public Image carpic1;
 	public Image carpic2;
 	public Image carpic3;
+public Image carpic4;
+public Image characterpic;
 
-   //Declare the objects used in the program
-   //These are things that are made up of more than one variable type
-	private Astronaut astro;
-	private Car car1;
-	private Car car2;
-	private Car car3;
+	public Car[] cars = new Car[5];
 
 
-   // Main method definition
-   // This is the code that runs first and automatically
+
 	public static void main(String[] args) {
-		BasicGameApp ex = new BasicGameApp();   //creates a new instance of the game
-		new Thread(ex).start();//creates a threads & starts up the code in the run( ) method
+		BasicGameApp ex = new BasicGameApp();
+		new Thread(ex).start();
 	}
 
 
-   // Constructor Method
-   // This has the same name as the class
-   // This section is the setup portion of the program
-   // Initialize your variables and construct your program objects here.
+
 	public BasicGameApp() {
       
       setUpGraphics();
        
-      //variable and objects
-      //create (construct) the objects needed for the game and load up 
-		astroPic = Toolkit.getDefaultToolkit().getImage("astronaut.png"); //load the picture
-		astro = new Astronaut(10,100);
+
 		background = Toolkit.getDefaultToolkit().getImage("Crossy_Road_Background.jpeg");
 		carpic1 = Toolkit.getDefaultToolkit().getImage("Cartoon_Car.png");
-		car1 = new Car((int)(50),(int)(100));
+		cars[1] = new Car(500,100);
 		carpic2 = Toolkit.getDefaultToolkit().getImage("RedCartoonCar.png");
-		car2 = new Car((int)(700),(int)(200));
-		carpic3 = Toolkit.getDefaultToolkit().getImage("YellowCartoonCar.jpeg");
-		car3 = new Car((int)(50),(int)(500));
-
-
-
-	}// BasicGameApp()
+		cars[2] = new Car(300,212);
+		carpic3 = Toolkit.getDefaultToolkit().getImage("YellowCartoonCar.png");
+		cars[3] = new Car(650,500);
+		carpic4 = Toolkit.getDefaultToolkit().getImage("bluecartooncar.png");
+		cars[4] = new Car(100, 375);
+		characterpic = Toolkit.getDefaultToolkit().getImage("crossyroadcharacter 2.png");
+	}
 
    
-//*******************************************************************************
-//User Method Section
-//
-// put your code to do things here.
 
-   // main thread
-   // this is the code that plays the game after you set things up
 	public void run() {
 
-      //for the moment we will loop things forever.
+
 		while (true) {
 
-         moveThings();  //move all the game objects
-         render();  // paint the graphics
-         pause(20); // sleep for 10 ms
+         moveThings();
+         render();
+         pause(20);
 		}
 	}
 
 
 	public void moveThings()
 	{
-      //calls the move( ) code in the objects
-		astro.move();
-
+      cars[1].wrap();
+	  cars[2].car3wrap();
+	  cars[3].car3wrap();
+	  cars[4].wrap();
 	}
 	
-   //Pauses or sleeps the computer for the amount specified in milliseconds
+
    public void pause(int time ){
-   		//sleep
+
 			try {
 				Thread.sleep(time);
 			} catch (InterruptedException e) {
 
 			}
    }
-
-   //Graphics setup method
    private void setUpGraphics() {
-      frame = new JFrame("Application Template");   //Create the program window or frame.  Names it.
+      frame = new JFrame("Application Template");
    
-      panel = (JPanel) frame.getContentPane();  //sets up a JPanel which is what goes in the frame
-      panel.setPreferredSize(new Dimension(WIDTH, HEIGHT));  //sizes the JPanel
-      panel.setLayout(null);   //set the layout
+      panel = (JPanel) frame.getContentPane();
+      panel.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+      panel.setLayout(null);
    
-      // creates a canvas which is a blank rectangular area of the screen onto which the application can draw
-      // and trap input events (Mouse and Keyboard events)
+
       canvas = new Canvas();  
       canvas.setBounds(0, 0, WIDTH, HEIGHT);
       canvas.setIgnoreRepaint(true);
    
-      panel.add(canvas);  // adds the canvas to the panel.
+      panel.add(canvas);
    
       // frame operations
-      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  //makes the frame close and exit nicely
-      frame.pack();  //adjusts the frame and its contents so the sizes are at their default or larger
-      frame.setResizable(false);   //makes it so the frame cannot be resized
-      frame.setVisible(true);      //IMPORTANT!!!  if the frame is not set to visible it will not appear on the screen!
-      
-      // sets up things so the screen displays images nicely.
+      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      frame.pack();
+      frame.setResizable(false);
+      frame.setVisible(true);
+
       canvas.createBufferStrategy(2);
       bufferStrategy = canvas.getBufferStrategy();
       canvas.requestFocus();
@@ -151,18 +132,16 @@ public class BasicGameApp implements Runnable {
    
    }
 
-
-	//paints things on the screen using bufferStrategy
 	private void render() {
 		Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
 		g.clearRect(0, 0, WIDTH, HEIGHT);
 
-      //draw the image of the astronaut
-		//g.drawImage(astroPic, astro.xpos, astro.ypos, astro.width, astro.height, null);
+
 		g.drawImage(background, 0,0,WIDTH,HEIGHT,null);
-		g.drawImage(carpic1, car1.xpos, car1.ypos, car1.width, car1.height, null);
-		g.drawImage(carpic2, car2.xpos, car2.ypos, car2.width, car2.height, null);
-		g.drawImage(carpic3, car3.xpos, car3.ypos, car3.width, car3.height, null);
+		g.drawImage(carpic1, cars[1].xpos, cars[1].ypos, cars[1].width, cars[1].height, null);
+		g.drawImage(carpic2, cars[2].xpos, cars[2].ypos, cars[2].width, cars[2].height, null);
+		g.drawImage(carpic3, cars[3].xpos, cars[3].ypos, cars[3].width, cars[3].height, null);
+		g.drawImage(carpic4, cars[4].xpos, cars[4].ypos, cars[4].width, cars[4].height, null);
 
 		g.dispose();
 

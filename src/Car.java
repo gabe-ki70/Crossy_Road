@@ -22,6 +22,7 @@ public class Car {
     public boolean isEast;
     public boolean isWest;
     public boolean isControlled;
+    public boolean isLeft;
     // METHOD DEFINITION SECTION
 
     // Constructor Definition
@@ -46,6 +47,7 @@ public class Car {
         isSouth = false;
         isWest = false;
         isControlled = false;
+        isLeft = true;
 
     } // constructor
 
@@ -81,12 +83,6 @@ public class Car {
 
     }
 
-    public void move() {
-        xpos = xpos + dx;
-        ypos = ypos + dy;
-        rec = new Rectangle(xpos, ypos, width, height);
-    }
-
     public void wrap() {
         if (isControlled) {
             if (isNorth == false && isSouth == false) {
@@ -105,6 +101,31 @@ public class Car {
                 dx = 5;
             }
         }
+        else {
+            dy = 0;
+            dx = 10;
+        }
+
+        if (xpos < -40) {
+            xpos = 1000 - width;
+        }
+        if (xpos > 1000 - width) {
+            xpos = 0;
+        }
+        if (ypos < -40) {
+            ypos = 700 - height;
+        }
+        if (ypos > 700 - height) {
+            ypos = 0;
+        }
+        xpos = xpos + dx;
+        ypos = ypos + dy;
+        rec = new Rectangle(xpos, ypos, width, height);
+    }
+
+    public void car3wrap() {
+        dy = 0;
+        dx = -10;
 
         if (xpos < -40) {
             xpos = 1000 - width;
