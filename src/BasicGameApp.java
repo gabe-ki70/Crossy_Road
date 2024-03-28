@@ -13,6 +13,8 @@
 
 //Graphics Libraries
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 import java.awt.*;
 import javax.swing.JFrame;
@@ -22,7 +24,7 @@ import javax.swing.JPanel;
 //*******************************************************************************
 // Class Definition Section
 
-public class BasicGameApp implements Runnable {
+public class BasicGameApp implements Runnable, KeyListener {
 
    //Variable Definition Section
    //Declare the variables used in the program 
@@ -43,8 +45,10 @@ public class BasicGameApp implements Runnable {
 	public Image carpic1;
 	public Image carpic2;
 	public Image carpic3;
+	public Image duckpic;
 public Image carpic4;
 public Image characterpic;
+private Car duck;
 
 	public Car[] cars = new Car[5];
 
@@ -71,7 +75,12 @@ public Image characterpic;
 		cars[3] = new Car(650,500);
 		carpic4 = Toolkit.getDefaultToolkit().getImage("bluecartooncar.png");
 		cars[4] = new Car(100, 375);
-		characterpic = Toolkit.getDefaultToolkit().getImage("crossyroadcharacter 2.png");
+		duck = new Car(365, 590);
+		duck.isControlled = true;
+		duck.height = 75;
+		duck.width = 50;
+		duckpic = Toolkit.getDefaultToolkit().getImage("crossyroadcharacter.png");
+
 	}
 
    
@@ -94,6 +103,7 @@ public Image characterpic;
 	  cars[2].car3wrap();
 	  cars[3].car3wrap();
 	  cars[4].wrap();
+	  duck.wrap();
 	}
 	
 
@@ -116,6 +126,7 @@ public Image characterpic;
       canvas = new Canvas();  
       canvas.setBounds(0, 0, WIDTH, HEIGHT);
       canvas.setIgnoreRepaint(true);
+	  canvas.addKeyListener(this);
    
       panel.add(canvas);
    
@@ -142,9 +153,56 @@ public Image characterpic;
 		g.drawImage(carpic2, cars[2].xpos, cars[2].ypos, cars[2].width, cars[2].height, null);
 		g.drawImage(carpic3, cars[3].xpos, cars[3].ypos, cars[3].width, cars[3].height, null);
 		g.drawImage(carpic4, cars[4].xpos, cars[4].ypos, cars[4].width, cars[4].height, null);
+		g.drawImage(duckpic, duck.xpos, duck.ypos, duck.width, duck.height, null);
 
 		g.dispose();
 
 		bufferStrategy.show();
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		System.out.println(e.getKeyCode());
+		if(e.getKeyCode() == 38){
+			System.out.println("going up");
+			duck.isNorth = true;
+		}
+		if(e.getKeyCode() == 39){
+			System.out.println("going right");
+			duck.isEast = true;
+		}
+		if(e.getKeyCode() == 37){
+			System.out.println("going left");
+			duck.isWest = true;
+		}
+		if(e.getKeyCode() == 40){
+			System.out.println("going down");
+			duck.isSouth = true;
+		}
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		if(e.getKeyCode() == 38){
+			System.out.println("going up");
+			duck.isNorth = false;
+		}
+		if(e.getKeyCode() == 40){
+			System.out.println("going down");
+			duck.isSouth = false;
+		}
+		if(e.getKeyCode() == 37){
+			System.out.println("going left");
+			duck.isWest = false;
+		}
+		if(e.getKeyCode() == 39){
+			System.out.println("going right");
+			duck.isEast = false;
+		}
 	}
 }
