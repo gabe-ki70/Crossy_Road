@@ -75,7 +75,7 @@ private Car duck;
 		cars[3] = new Car(650,500);
 		carpic4 = Toolkit.getDefaultToolkit().getImage("bluecartooncar.png");
 		cars[4] = new Car(100, 375);
-		duck = new Car(365, 590);
+		duck = new Car(365, 600);
 		duck.isControlled = true;
 		duck.height = 75;
 		duck.width = 50;
@@ -104,6 +104,21 @@ private Car duck;
 	  cars[3].car3wrap();
 	  cars[4].wrap();
 	  duck.wrap();
+
+	  for(int i = 0; i < cars.length; i++) {
+		  if (duck.rec.intersects(cars[1].rec)){
+			  System.exit(0);
+		  }
+		  else if(duck.rec.intersects(cars[2].rec)){
+			  System.exit(0);
+		  }
+		  else if(duck.rec.intersects(cars[3].rec)){
+			  System.exit(0);
+		  }
+		  else if(duck.rec.intersects(cars[4].rec)){
+			  System.exit(0);
+		  }
+	  }
 	}
 	
 
