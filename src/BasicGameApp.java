@@ -47,7 +47,8 @@ public class BasicGameApp implements Runnable, KeyListener {
 	public Image carpic3;
 	public Image duckpic;
 public Image carpic4;
-public Image characterpic;
+public Image winscreen;
+public boolean isWinning;
 private Car duck;
 
 	public Car[] cars = new Car[5];
@@ -65,8 +66,9 @@ private Car duck;
       
       setUpGraphics();
        
-
+		isWinning = false;
 		background = Toolkit.getDefaultToolkit().getImage("Crossy_Road_Background.jpeg");
+		winscreen = Toolkit.getDefaultToolkit().getImage("win_screen.png");
 		carpic1 = Toolkit.getDefaultToolkit().getImage("Cartoon_Car.png");
 		cars[1] = new Car(500,100);
 		carpic2 = Toolkit.getDefaultToolkit().getImage("RedCartoonCar.png");
@@ -105,7 +107,6 @@ private Car duck;
 	  cars[4].wrap();
 	  duck.wrap();
 
-	  for(int i = 0; i < cars.length; i++) {
 		  if (duck.rec.intersects(cars[1].rec)){
 			  System.exit(0);
 		  }
@@ -118,6 +119,8 @@ private Car duck;
 		  else if(duck.rec.intersects(cars[4].rec)){
 			  System.exit(0);
 		  }
+	  if (duck.ypos <= 30){
+		  isWinning = true;
 	  }
 	}
 	
@@ -162,14 +165,17 @@ private Car duck;
 		Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
 		g.clearRect(0, 0, WIDTH, HEIGHT);
 
-
-		g.drawImage(background, 0,0,WIDTH,HEIGHT,null);
-		g.drawImage(carpic1, cars[1].xpos, cars[1].ypos, cars[1].width, cars[1].height, null);
-		g.drawImage(carpic2, cars[2].xpos, cars[2].ypos, cars[2].width, cars[2].height, null);
-		g.drawImage(carpic3, cars[3].xpos, cars[3].ypos, cars[3].width, cars[3].height, null);
-		g.drawImage(carpic4, cars[4].xpos, cars[4].ypos, cars[4].width, cars[4].height, null);
-		g.drawImage(duckpic, duck.xpos, duck.ypos, duck.width, duck.height, null);
-
+		if(isWinning == false) {
+			g.drawImage(background, 0, 0, WIDTH, HEIGHT, null);
+			g.drawImage(carpic1, cars[1].xpos, cars[1].ypos, cars[1].width, cars[1].height, null);
+			g.drawImage(carpic2, cars[2].xpos, cars[2].ypos, cars[2].width, cars[2].height, null);
+			g.drawImage(carpic3, cars[3].xpos, cars[3].ypos, cars[3].width, cars[3].height, null);
+			g.drawImage(carpic4, cars[4].xpos, cars[4].ypos, cars[4].width, cars[4].height, null);
+			g.drawImage(duckpic, duck.xpos, duck.ypos, duck.width, duck.height, null);
+		}
+		if(isWinning == true){
+			g.drawImage(winscreen,0,0, WIDTH, HEIGHT,null);
+		}
 		g.dispose();
 
 		bufferStrategy.show();
