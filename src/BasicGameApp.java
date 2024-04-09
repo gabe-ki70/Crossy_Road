@@ -17,6 +17,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 import java.awt.*;
+import java.util.logging.Level;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -51,6 +52,8 @@ public Image winscreen;
 public Image losescreen;
 public boolean isWinning;
 public boolean isLosing;
+public boolean isWinningLevel2;
+public int LevelCounter;
 private Car duck;
 
 	public Car[] cars = new Car[5];
@@ -70,6 +73,8 @@ private Car duck;
        
 		isWinning = false;
 		isLosing = false;
+		isWinningLevel2 = false;
+		LevelCounter = 1;
 		background = Toolkit.getDefaultToolkit().getImage("Crossy_Road_Background.jpeg");
 		winscreen = Toolkit.getDefaultToolkit().getImage("win_screen.png");
 		losescreen = Toolkit.getDefaultToolkit().getImage("game_over_screen.jpeg");
@@ -126,7 +131,13 @@ private Car duck;
 
 	  if (duck.ypos <= 30){
 		  isWinning = true;
+		  LevelCounter = 2;
 	  }
+
+	  if (duck.ypos <= 30 && LevelCounter = 2){
+		  isWinningLevel2 = false;
+	  }
+
 	}
 	
 
