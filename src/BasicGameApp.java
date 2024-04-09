@@ -48,7 +48,9 @@ public class BasicGameApp implements Runnable, KeyListener {
 	public Image duckpic;
 public Image carpic4;
 public Image winscreen;
+public Image losescreen;
 public boolean isWinning;
+public boolean isLosing;
 private Car duck;
 
 	public Car[] cars = new Car[5];
@@ -67,8 +69,10 @@ private Car duck;
       setUpGraphics();
        
 		isWinning = false;
+		isLosing = false;
 		background = Toolkit.getDefaultToolkit().getImage("Crossy_Road_Background.jpeg");
 		winscreen = Toolkit.getDefaultToolkit().getImage("win_screen.png");
+		losescreen = Toolkit.getDefaultToolkit().getImage("game_over_screen.jpeg");
 		carpic1 = Toolkit.getDefaultToolkit().getImage("Cartoon_Car.png");
 		cars[1] = new Car(500,100);
 		carpic2 = Toolkit.getDefaultToolkit().getImage("RedCartoonCar.png");
@@ -107,18 +111,19 @@ private Car duck;
 	  cars[4].wrap();
 	  duck.wrap();
 
-		  if (duck.rec.intersects(cars[1].rec)){
-			  System.exit(0);
-		  }
-		  else if(duck.rec.intersects(cars[2].rec)){
-			  System.exit(0);
-		  }
-		  else if(duck.rec.intersects(cars[3].rec)){
-			  System.exit(0);
-		  }
-		  else if(duck.rec.intersects(cars[4].rec)){
-			  System.exit(0);
-		  }
+		if (duck.rec.intersects(cars[1].rec)){
+			isLosing = true;
+		}
+		else if(duck.rec.intersects(cars[2].rec)){
+			isLosing = true;
+		}
+		else if(duck.rec.intersects(cars[3].rec)){
+			isLosing = true;
+		}
+		else if(duck.rec.intersects(cars[4].rec)){
+			isLosing = true;
+		}
+
 	  if (duck.ypos <= 30){
 		  isWinning = true;
 	  }
@@ -166,16 +171,22 @@ private Car duck;
 		g.clearRect(0, 0, WIDTH, HEIGHT);
 
 		if(isWinning == false) {
-			g.drawImage(background, 0, 0, WIDTH, HEIGHT, null);
-			g.drawImage(carpic1, cars[1].xpos, cars[1].ypos, cars[1].width, cars[1].height, null);
-			g.drawImage(carpic2, cars[2].xpos, cars[2].ypos, cars[2].width, cars[2].height, null);
-			g.drawImage(carpic3, cars[3].xpos, cars[3].ypos, cars[3].width, cars[3].height, null);
-			g.drawImage(carpic4, cars[4].xpos, cars[4].ypos, cars[4].width, cars[4].height, null);
-			g.drawImage(duckpic, duck.xpos, duck.ypos, duck.width, duck.height, null);
+			if(isLosing == true){
+				g.drawImage(losescreen, 0, 0, WIDTH, HEIGHT, null);
+			}
+			else {
+				g.drawImage(background, 0, 0, WIDTH, HEIGHT, null);
+				g.drawImage(carpic1, cars[1].xpos, cars[1].ypos, cars[1].width, cars[1].height, null);
+				g.drawImage(carpic2, cars[2].xpos, cars[2].ypos, cars[2].width, cars[2].height, null);
+				g.drawImage(carpic3, cars[3].xpos, cars[3].ypos, cars[3].width, cars[3].height, null);
+				g.drawImage(carpic4, cars[4].xpos, cars[4].ypos, cars[4].width, cars[4].height, null);
+				g.drawImage(duckpic, duck.xpos, duck.ypos, duck.width, duck.height, null);
+			}
 		}
-		if(isWinning == true){
+		else{
 			g.drawImage(winscreen,0,0, WIDTH, HEIGHT,null);
 		}
+
 		g.dispose();
 
 		bufferStrategy.show();
