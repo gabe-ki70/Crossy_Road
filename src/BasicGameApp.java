@@ -130,8 +130,34 @@ private Car duck;
 		}
 
 	  if (duck.ypos <= 30){
+		  LevelCounter = LevelCounter + 1;
+		  duck.xpos = 365;
+		  duck.ypos = 600;
+	  }
+	  if (LevelCounter == 2){
+
+		  cars[1].dx = cars[1].dx + 3;
+		  cars[2].dx = cars[2].dx + 3;
+		  cars[3].dx = cars[3].dx + 3;
+		  cars[4].dx = cars[4].dx + 3;
+	  }
+
+	  if (LevelCounter == 3){
+		  cars[1].dx = cars[1].dx + 3;
+		  cars[2].dx = cars[2].dx + 3;
+		  cars[3].dx = cars[3].dx + 3;
+		  cars[4].dx = cars[4].dx + 3;
+	  }
+
+	  if (LevelCounter == 4){
+		  cars[1].dx = cars[1].dx + 3;
+		  cars[2].dx = cars[2].dx + 3;
+		  cars[3].dx = cars[3].dx + 3;
+		  cars[4].dx = cars[4].dx + 3;
+	  }
+
+	  if (LevelCounter == 5){
 		  isWinning = true;
-		  LevelCounter = 2;
 	  }
 
 	  //if (duck.ypos <= 30 && LevelCounter = 2){
@@ -192,6 +218,9 @@ private Car duck;
 				g.drawImage(carpic3, cars[3].xpos, cars[3].ypos, cars[3].width, cars[3].height, null);
 				g.drawImage(carpic4, cars[4].xpos, cars[4].ypos, cars[4].width, cars[4].height, null);
 				g.drawImage(duckpic, duck.xpos, duck.ypos, duck.width, duck.height, null);
+				Font f = new Font("Times New Roman",Font.BOLD, 60);
+				g.setFont(f);
+				g.drawString("Level " + LevelCounter, 50, 75);
 			}
 		}
 		else{
