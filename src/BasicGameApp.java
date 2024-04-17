@@ -134,9 +134,9 @@ private Car duck;
 		  LevelCounter = 2;
 	  }
 
-	  if (duck.ypos <= 30 && LevelCounter = 2){
-		  isWinningLevel2 = false;
-	  }
+	  //if (duck.ypos <= 30 && LevelCounter = 2){
+	//	  isWinningLevel2 = false;
+	 // }
 
 	}
 	

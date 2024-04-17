@@ -34,7 +34,7 @@ public class Car {
     public Car(int pXpos, int pYpos) {
         xpos = pXpos;
         ypos = pYpos;
-        dx = 2;
+        dx = 3;
         dy = 0;
         width = 100;
         height = 100;
