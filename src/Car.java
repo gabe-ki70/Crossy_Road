@@ -36,7 +36,7 @@ public class Car {
     public Car(int pXpos, int pYpos) {
         xpos = pXpos;
         ypos = pYpos;
-        dx = 2;
+        dx = 10;
         dy = 0;
         width = 100;
         height = 100;
@@ -74,6 +74,7 @@ public class Car {
                 dx = 5;
             }
         }
+
         if (xpos < 0 || xpos > 1000 - width) {
             dx = -dx;
         }
@@ -106,7 +107,7 @@ public class Car {
         }
         else {
             dy = 0;
-            dx = 10;
+            dx = 7;
         }
 
         if (xpos < -40) {
@@ -128,7 +129,7 @@ public class Car {
 
     public void car3wrap() {
         dy = 0;
-        dx = -10;
+        dx = -7;
 
         if (xpos < -40) {
             xpos = 1000 - width;

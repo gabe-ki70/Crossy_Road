@@ -85,7 +85,7 @@ private Car bird;
 		carpic2 = Toolkit.getDefaultToolkit().getImage("RedCartoonCar.png");
 		cars[2] = new Car(300,212);
 		carpic3 = Toolkit.getDefaultToolkit().getImage("YellowCartoonCar.png");
-		cars[3] = new Car(650,500);
+		cars[3] = new Car(650,495);
 		carpic4 = Toolkit.getDefaultToolkit().getImage("bluecartooncar.png");
 		cars[4] = new Car(100, 375);
 		duck = new Car(365, 600);
@@ -132,8 +132,10 @@ private Car bird;
 		else if(duck.rec.intersects(cars[4].rec)){
 			isLosing = true;
 		}
-		else if(duck.rec.intersects(bird.rec)){
-			isLosing = true;
+		if(LevelCounter > 2) {
+			if (duck.rec.intersects(bird.rec)) {
+				isLosing = true;
+			}
 		}
 
 	  if (duck.ypos <= 30){
@@ -233,8 +235,10 @@ private Car bird;
 		else{
 			g.drawImage(winscreen,0,0, WIDTH, HEIGHT,null);
 		}
-		if(LevelCounter > 3){
-			g.drawImage(birdpic, bird.xpos, bird.ypos, bird.width, bird.height, null);
+		if(isLosing == false) {
+			if (LevelCounter > 2) {
+				g.drawImage(birdpic, bird.xpos, bird.ypos, bird.width, bird.height, null);
+			}
 		}
 
 		g.dispose();
