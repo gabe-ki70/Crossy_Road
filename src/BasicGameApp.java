@@ -218,7 +218,7 @@ private Car duck;
 				g.drawImage(carpic3, cars[3].xpos, cars[3].ypos, cars[3].width, cars[3].height, null);
 				g.drawImage(carpic4, cars[4].xpos, cars[4].ypos, cars[4].width, cars[4].height, null);
 				g.drawImage(duckpic, duck.xpos, duck.ypos, duck.width, duck.height, null);
-				Font f = new Font("Times New Roman",Font.BOLD, 60);
+				Font f = new Font("Times New Roman",Font.BOLD, 70);
 				g.setFont(f);
 				g.drawString("Level " + LevelCounter, 50, 75);
 			}
