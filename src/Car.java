@@ -23,6 +23,8 @@ public class Car {
     public boolean isWest;
     public boolean isControlled;
     public boolean isLeft;
+    public boolean isBouncing;
+
     // METHOD DEFINITION SECTION
 
     // Constructor Definition
@@ -42,6 +44,7 @@ public class Car {
         rec = new Rectangle(xpos, ypos, width, height);
         isCrashing = false;
         isWrapping = false;
+        isBouncing = false;
         isNorth = false;
         isEast = false;
         isSouth = false;

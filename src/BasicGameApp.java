@@ -47,6 +47,7 @@ public class BasicGameApp implements Runnable, KeyListener {
 	public Image carpic2;
 	public Image carpic3;
 	public Image duckpic;
+	public Image birdpic;
 public Image carpic4;
 public Image winscreen;
 public Image losescreen;
@@ -55,6 +56,7 @@ public boolean isLosing;
 public boolean isWinningLevel2;
 public int LevelCounter;
 private Car duck;
+private Car bird;
 
 	public Car[] cars = new Car[5];
 
@@ -91,7 +93,8 @@ private Car duck;
 		duck.height = 75;
 		duck.width = 50;
 		duckpic = Toolkit.getDefaultToolkit().getImage("crossyroadcharacter.png");
-
+		bird = new Car(50, 290);
+		birdpic = Toolkit.getDefaultToolkit().getImage("pixelbird.png");
 	}
 
    
@@ -115,6 +118,7 @@ private Car duck;
 	  cars[3].car3wrap();
 	  cars[4].wrap();
 	  duck.wrap();
+	  bird.bounce();
 
 		if (duck.rec.intersects(cars[1].rec)){
 			isLosing = true;
@@ -126,6 +130,9 @@ private Car duck;
 			isLosing = true;
 		}
 		else if(duck.rec.intersects(cars[4].rec)){
+			isLosing = true;
+		}
+		else if(duck.rec.intersects(bird.rec)){
 			isLosing = true;
 		}
 
@@ -225,6 +232,9 @@ private Car duck;
 		}
 		else{
 			g.drawImage(winscreen,0,0, WIDTH, HEIGHT,null);
+		}
+		if(LevelCounter > 3){
+			g.drawImage(birdpic, bird.xpos, bird.ypos, bird.width, bird.height, null);
 		}
 
 		g.dispose();
