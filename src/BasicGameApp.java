@@ -62,6 +62,7 @@ private Car bird;
 
 
 
+
 	public static void main(String[] args) {
 		BasicGameApp ex = new BasicGameApp();
 		new Thread(ex).start();
@@ -81,19 +82,19 @@ private Car bird;
 		winscreen = Toolkit.getDefaultToolkit().getImage("win_screen.png");
 		losescreen = Toolkit.getDefaultToolkit().getImage("game_over_screen.jpeg");
 		carpic1 = Toolkit.getDefaultToolkit().getImage("Cartoon_Car.png");
-		cars[1] = new Car(500,100);
+		cars[1] = new Car(500,120);
 		carpic2 = Toolkit.getDefaultToolkit().getImage("RedCartoonCar.png");
-		cars[2] = new Car(300,212);
+		cars[2] = new Car(300,232);
 		carpic3 = Toolkit.getDefaultToolkit().getImage("YellowCartoonCar.png");
-		cars[3] = new Car(650,495);
+		cars[3] = new Car(650,515);
 		carpic4 = Toolkit.getDefaultToolkit().getImage("bluecartooncar.png");
-		cars[4] = new Car(100, 375);
-		duck = new Car(365, 600);
+		cars[4] = new Car(100, 395);
+		duck = new Car(365, 610);
 		duck.isControlled = true;
 		duck.height = 75;
 		duck.width = 50;
 		duckpic = Toolkit.getDefaultToolkit().getImage("crossyroadcharacter.png");
-		bird = new Car(50, 290);
+		bird = new Car(50, 300);
 		birdpic = Toolkit.getDefaultToolkit().getImage("pixelbird.png");
 	}
 
@@ -114,9 +115,17 @@ private Car bird;
 	public void moveThings()
 	{
       cars[1].wrap();
+		cars[1].dx = 7;
+		cars[1].dy = 0;
 	  cars[2].car3wrap();
+		cars[2].dx = -7;
+		cars[2].dy = 0;
 	  cars[3].car3wrap();
+		cars[3].dx = -7;
+		cars[3].dy = 0;
 	  cars[4].wrap();
+		cars[4].dx = 7;
+		cars[4].dy = 0;
 	  duck.wrap();
 	  bird.bounce();
 
@@ -144,25 +153,24 @@ private Car bird;
 		  duck.ypos = 600;
 	  }
 	  if (LevelCounter == 2){
-
 		  cars[1].dx = cars[1].dx + 3;
-		  cars[2].dx = cars[2].dx + 3;
-		  cars[3].dx = cars[3].dx + 3;
+		  cars[2].dx = cars[2].dx - 3;
+		  cars[3].dx = cars[3].dx - 3;
 		  cars[4].dx = cars[4].dx + 3;
 	  }
 
 	  if (LevelCounter == 3){
 		  cars[1].dx = cars[1].dx + 3;
-		  cars[2].dx = cars[2].dx + 3;
-		  cars[3].dx = cars[3].dx + 3;
+		  cars[2].dx = cars[2].dx - 3;
+		  cars[3].dx = cars[3].dx - 3;
 		  cars[4].dx = cars[4].dx + 3;
 	  }
 
 	  if (LevelCounter == 4){
-		  cars[1].dx = cars[1].dx + 3;
-		  cars[2].dx = cars[2].dx + 3;
-		  cars[3].dx = cars[3].dx + 3;
-		  cars[4].dx = cars[4].dx + 3;
+		  cars[1].dx = cars[1].dx + 5;
+		  cars[2].dx = cars[2].dx - 5;
+		  cars[3].dx = cars[3].dx - 5;
+		  cars[4].dx = cars[4].dx + 5;
 	  }
 
 	  if (LevelCounter == 5){
@@ -235,9 +243,11 @@ private Car bird;
 		else{
 			g.drawImage(winscreen,0,0, WIDTH, HEIGHT,null);
 		}
-		if(isLosing == false) {
-			if (LevelCounter > 2) {
-				g.drawImage(birdpic, bird.xpos, bird.ypos, bird.width, bird.height, null);
+		if(isWinning == false) {
+			if (isLosing == false) {
+				if (LevelCounter > 2) {
+					g.drawImage(birdpic, bird.xpos, bird.ypos, 95, 75, null);
+				}
 			}
 		}
 
@@ -255,19 +265,19 @@ private Car bird;
 	public void keyPressed(KeyEvent e) {
 		System.out.println(e.getKeyCode());
 		if(e.getKeyCode() == 38){
-			System.out.println("going up");
+			//System.out.println("going up");
 			duck.isNorth = true;
 		}
 		if(e.getKeyCode() == 39){
-			System.out.println("going right");
+			//System.out.println("going right");
 			duck.isEast = true;
 		}
 		if(e.getKeyCode() == 37){
-			System.out.println("going left");
+			//System.out.println("going left");
 			duck.isWest = true;
 		}
 		if(e.getKeyCode() == 40){
-			System.out.println("going down");
+			//System.out.println("going down");
 			duck.isSouth = true;
 		}
 	}
@@ -275,19 +285,19 @@ private Car bird;
 	@Override
 	public void keyReleased(KeyEvent e) {
 		if(e.getKeyCode() == 38){
-			System.out.println("going up");
+			//System.out.println("going up");
 			duck.isNorth = false;
 		}
 		if(e.getKeyCode() == 40){
-			System.out.println("going down");
+			//System.out.println("going down");
 			duck.isSouth = false;
 		}
 		if(e.getKeyCode() == 37){
-			System.out.println("going left");
+			//System.out.println("going left");
 			duck.isWest = false;
 		}
 		if(e.getKeyCode() == 39){
-			System.out.println("going right");
+			//System.out.println("going right");
 			duck.isEast = false;
 		}
 	}

@@ -39,7 +39,7 @@ public class Car {
         dx = 10;
         dy = 0;
         width = 100;
-        height = 100;
+        height = 70;
         isAlive = true;
         rec = new Rectangle(xpos, ypos, width, height);
         isCrashing = false;
@@ -105,10 +105,10 @@ public class Car {
                 dx = 5;
             }
         }
-        else {
-            dy = 0;
-            dx = 7;
-        }
+       // else {
+         //   dy = 0;
+          //  dx = 7;
+      //  }
 
         if (xpos < -40) {
             xpos = 1000 - width;
@@ -128,8 +128,8 @@ public class Car {
     }
 
     public void car3wrap() {
-        dy = 0;
-        dx = -7;
+        //dy = 0;
+     //   dx = -7;
 
         if (xpos < -40) {
             xpos = 1000 - width;
